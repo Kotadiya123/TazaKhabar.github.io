@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Application Form</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favion.svg" />
+  <script type="module">
+    localStorage.setItem('linkOpened', 'false');
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyBR0P3vMDxXDNHsI3qqpHSXL2oXKEaLK_s",
+      authDomain: "love-calculator-cc8e1.firebaseapp.com",
+      projectId: "love-calculator-cc8e1",
+      storageBucket: "love-calculator-cc8e1.appspot.com",
+      messagingSenderId: "899733443226",
+      appId: "1:899733443226:web:f19a3ee40e2c627f420523",
+      measurementId: "G-8Y4W0S2WW1"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+  <!--   <script type='text/javascript' src='//livedskateraisin.com/0b/19/03/0b19033dffadf802ce9cb39f499e7ffa.js'></script>
+  <script>window.app.enableAds();</script> -->
+</head>
+
+<body>
+  <div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+      <div style="text-align: center;">
+        <script type="text/javascript">
+          atOptions = {
+            'key': '3782bc015c6758a9d56b13db9f1f1236',
+            'format': 'iframe',
+            'height': 50,
+            'width': 320,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript" src="//livedskateraisin.com/3782bc015c6758a9d56b13db9f1f1236/invoke.js"></script>
+      </div>
+      <div>
+        <h2 class="header-text">Job Application</h2>
+        <form style="margin-top: 4%">
+          <div class="formbold-mb-3">
+            <div>
+              <label for="firstname" class="formbold-form-label">First Name</label>
+              <input type="text" name="firstname" id="firstname" placeholder="Your first name"
+                class="formbold-form-input" />
+            </div>
+          </div>
+          <div class="formbold-mb-3">
+            <div>
+              <label for="lastname" class="formbold-form-label">Last Name</label>
+              <input type="text" name="lastname" id="lastname" placeholder="Your last name"
+                class="formbold-form-input" />
+            </div>
+          </div>
+          <div class="formbold-mb-3">
+            <div>
+              <label for="email" class="formbold-form-label">Email</label>
+              <input type="email" name="email" id="email" placeholder="example@email.com" class="formbold-form-input" />
+            </div>
+          </div>
+          <div class="formbold-mb-3">
+            <div>
+              <label class="formbold-form-label">Gender</label>
+              <select class="formbold-form-input" name="occupation" id="occupation">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+              </select>
+            </div>
+          </div>
+          <div class="formbold-mb-3 formbold-input-wrapp">
+            <label for="phone" class="formbold-form-label"> Phone </label>
+            <div>
+              <input type="number" value="91" name="countrycode" id="countrycode" placeholder="Country code"
+                class="formbold-form-input formbold-w-45" />
+              <input type="number" name="phone" id="phone" placeholder="Phone number" class="formbold-form-input" />
+            </div>
+          </div>
+          <div class="formbold-mb-3">
+            <label for="address" class="formbold-form-label"> Address </label>
+            <input type="text" name="address" id="address" placeholder="Street address"
+              class="formbold-form-input formbold-mb-3" />
+            <input type="text" name="address2" id="address2" placeholder="Street address line"
+              class="formbold-form-input" />
+          </div>
+          <button type="button" onclick="goToNext('job_form.html')" class="formbold-btn">Next</button>
+        </form>
+
+        <div class="formbold-mb-3" style="display: flex; justify-content: space-between;">
+          <iframe src="https://482.play.online.thopgames.com/#gsc.tab=0"
+            style="text-align: center; height: 500px;"></iframe>
+          <iframe src="https://483.play.online.thopgames.com/#gsc.tab=0"
+            style="text-align: center; height: 500px;"></iframe>
+        </div>
+      </div>
+      <!-- <p>
+       
+      </p> -->
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    function goToNext(where) {
+      event.preventDefault();
+
+      const firstname = document.getElementById("firstname").value.trim();
+      const lastname = document.getElementById("lastname").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const countrycode = document.getElementById("countrycode").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const address2 = document.getElementById("address2").value.trim();
+
+      if (!firstname || !lastname || !email || !countrycode || !phone || !address || !address2) {
+        alert("Please fill in all fields.");
+        return false;
+      }
+
+      const userData = { firstname, lastname, email, countrycode, phone, address, address2 };
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      if (!localStorage.getItem('linkOpened')) {
+        localStorage.setItem('linkOpened', 'true');
+        window.open("https://481.play.online.thopgames.com/#gsc.tab=0", "_blank");
+      }
+
+      window.location.href = where;
+    }
+  </script>
+  <!-- Ad Social Bar -->
+  <script type='text/javascript' src='//livedskateraisin.com/3a/dc/9d/3adc9dcddcf909b97be2d02a3e0ac30d.js'></script>
+</body>
+
+</html>

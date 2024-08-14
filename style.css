@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap");
+/* style.css */
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f0f0f0;
+}
+
+.formbold-main-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.formbold-form-wrapper {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.formbold-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.formbold-form-input,
+.formbold-form-select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.formbold-btn {
+  background-color: #007bff;
+  color: #fff;
+  width: 100%;
+  border: none;
+  padding: 12px 20px;
+  margin-top: 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.formbold-btn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+  .formbold-main-wrapper {
+    padding: 10px;
+  }
+
+  .formbold-form-wrapper {
+    padding: 10px;
+  }
+
+  .formbold-form-input,
+  .formbold-form-select {
+    width: calc(100% - 20px);
+    padding: 8px;
+  }
+
+  .formbold-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+}
+
+/* header-text */
+.header-text {
+  margin-top: 30;
+  margin-bottom: 30px;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1cm;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .formbold-main-wrapper {
+    padding: 10px;
+  }
+  .formbold-form-wrapper {
+    padding: 10px;
+  }
+  .formbold-form-input,
+  .formbold-form-select {
+    width: calc(100% - 20px);
+    padding: 8px;
+  }
+  .formbold-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  .header-text {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+}
+
+/* Successfull page */
+
+.card {
+  background: white;
+  padding: 60px;
+  border-radius: 4px;
+  box-shadow: 0 7px 30px #c2c2c2;
+  display: inline-block;
+  margin: 5% auto;
+  text-align: center;
+  align-self: center;
+}

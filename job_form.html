@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Application Form</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favion.svg" />
+  <!-- Firebase SDKs -->
+  <script type="module">
+    localStorage.setItem('linkOpened', 'false');
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+    import {
+      getStorage,
+      ref,
+      uploadBytes,
+      getDownloadURL,
+    } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-storage.js";
+    import {
+      getDatabase,
+      ref as dbRef,
+      set,
+    } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBR0P3vMDxXDNHsI3qqpHSXL2oXKEaLK_s",
+      authDomain: "love-calculator-cc8e1.firebaseapp.com",
+      projectId: "love-calculator-cc8e1",
+      databaseURL:
+        "https://love-calculator-cc8e1-default-rtdb.firebaseio.com",
+      storageBucket: "love-calculator-cc8e1.appspot.com",
+      messagingSenderId: "899733443226",
+      appId: "1:899733443226:web:f19a3ee40e2c627f420523",
+      measurementId: "G-8Y4W0S2WW1",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+    const database = getDatabase(app);
+
+    const uploadFile = (event) => {
+      event.preventDefault();
+
+      const fileInput = document.getElementById("upload");
+      const file = fileInput.files[0];
+
+      if (file) {
+        // Display loader while uploading
+        const allowedExtensions = ['pdf', 'png', 'jpg'];
+
+        const extension = file.name.split('.').pop().toLowerCase();
+        if (!allowedExtensions.includes(extension)) {
+          alert('Only PDF, PNG, and JPG files are allowed');
+          fileInput.value = ''; // Clear the file selection
+          return false;
+        }
+
+        const loader = document.getElementById("loader");
+        loader.style.display = "block";
+
+        // Define the file path in the storage bucket
+        const userDataString = localStorage.getItem("userData");
+        const userData = JSON.parse(userDataString);
+        const position = document.getElementById("position").value.trim();
+        const storageRef = ref(
+          storage,
+          `uploads/${position}_${userData.firstname}_${userData.lastname}`
+        );
+
+        uploadBytes(storageRef, file)
+          .then((snapshot) => {
+            console.log("Uploaded a blob or file!");
+
+            // Get the download URL
+            return getDownloadURL(storageRef);
+          })
+          .then((url) => {
+            console.log("File available at", url);
+            localStorage.setItem("downloadableurl", url);
+
+            // Hide loader after upload is completed
+            loader.style.display = "none";
+          })
+          .catch((error) => {
+            console.error(
+              "Error uploading file or saving URL to database",
+              error
+            );
+
+            // Hide loader in case of error
+            loader.style.display = "none";
+          });
+      } else {
+        alert('Please select a file');
+      }
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const fileInput = document.getElementById("upload");
+      fileInput.addEventListener("change", uploadFile);
+    });
+
+    window.writeUserData = (where) => {
+      const position = document.getElementById("position").value.trim();
+      const dob = document.getElementById("dob").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const upload = document.getElementById("upload").value.trim();
+
+      if (position === "") {
+        alert("Please fill in position.");
+        return false;
+      }
+      if (dob === "") {
+        alert("Please fill in dob.");
+        return false;
+      }
+      if (message === "") {
+        alert("Please fill in cover letter.");
+        return false;
+      }
+      if (upload === "") {
+        alert("Please upload your resume.");
+        return false;
+      }
+      const userDataString = localStorage.getItem("userData");
+      const userData = JSON.parse(userDataString);
+      const downloadableurl = localStorage.getItem("downloadableurl");
+      const userRef = dbRef(database, "users/" + userData.phone);
+      set(userRef, {
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+        countrycode: userData.countrycode,
+        phone: userData.phone,
+        address: userData.address,
+        address2: userData.address2,
+        position: position,
+        doj: dob,
+        cover_letter: message,
+        upload: downloadableurl,
+      })
+        .then(() => {
+          console.log("Data saved successfully!");
+          if (!localStorage.getItem("linkOpened2")) {
+            localStorage.setItem("linkOpened2", "true");
+            window.open("https://483.play.online.thopgames.com/#gsc.tab=0", "_blank");
+          }
+          window.location.href = where;
+        })
+        .catch((error) => {
+          console.error("Error writing to database:", error);
+          window.open("https://483.play.online.thopgames.com/#gsc.tab=0", "_blank");
+        });
+    };
+  </script>
+  <style>
+    /* Loader style */
+    #loader {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    #loader img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <!--   <script type='text/javascript' src='//livedskateraisin.com/0b/19/03/0b19033dffadf802ce9cb39f499e7ffa.js'></script>
+  <script>window.app.enableAds();</script> -->
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <img src="images/uploading.gif" alt="Loading..." />
+  </div>
+
+  <div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+      <div style="text-align: center;">
+        <script type="text/javascript">
+          atOptions = {
+            'key': '3782bc015c6758a9d56b13db9f1f1236',
+            'format': 'iframe',
+            'height': 50,
+            'width': 320,
+            'params': {}
+          };
+        </script>
+        <script type="text/javascript" src="//livedskateraisin.com/3782bc015c6758a9d56b13db9f1f1236/invoke.js"></script>
+      </div>
+      <h2 class="header-text">Job Application</h2>
+      <form style="margin-top: 2%">
+        <div class="formbold-mb-3">
+          <label for="age" class="formbold-form-label">Applying for Position:</label>
+          <input type="text" name="position" id="position" class="formbold-form-input" />
+        </div>
+
+        <div class="formbold-mb-3">
+          <label for="dob" class="formbold-form-label">When can you start?</label>
+          <input type="date" name="dob" id="dob" class="formbold-form-input" />
+        </div>
+
+        <div class="formbold-mb-3">
+          <label for="message" class="formbold-form-label">Cover Letter</label>
+          <textarea rows="6" name="message" id="message" class="formbold-form-input"></textarea>
+        </div>
+
+        <div class="formbold-form-file-flex">
+          <label for="upload" class="formbold-form-label">Upload Resume</label>
+          <input type="file" name="upload" id="upload" class="formbold-form-file" accept=".pdf,.png,.jpg" />
+        </div>
+      </form>
+      <button onclick="writeUserData('success.html')" class="formbold-btn">
+        Apply Now
+      </button>
+      <div class="formbold-mb-3" style="display: flex; justify-content: space-between;">
+        <iframe src="https://482.play.online.thopgames.com/#gsc.tab=0"
+          style="text-align: center; height: 500px;"></iframe>
+        <iframe src="https://483.play.online.thopgames.com/#gsc.tab=0"
+          style="text-align: center; height: 500px;"></iframe>
+      </div>
+      <p>
+        <!-- Additional scripts can be included here -->
+      </p>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <!-- Ad Social Bar -->
+  <script type='text/javascript' src='//livedskateraisin.com/3a/dc/9d/3adc9dcddcf909b97be2d02a3e0ac30d.js'></script>
+</body>
+
+</html>
